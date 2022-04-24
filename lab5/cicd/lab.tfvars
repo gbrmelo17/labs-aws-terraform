@@ -1,0 +1,7 @@
+ami_id        = "ami-03ededff12e34e59e"
+instance_type = "t2.micro"
+key_name      = "gabriel-aws"
+hash          = "2b97bd3f4639a5df6223d7ce728a611a4cbddea9622c1837967c83c86ebb2baa"
+token         = "AWJS6H2CVHTK62WEFAWOK73CMXQP2"
+environment   = "lab"
+name_runner   = "gabriel-runner"

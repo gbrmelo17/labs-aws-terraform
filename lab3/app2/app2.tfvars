@@ -6,6 +6,6 @@ enabled_metrics = ["GroupMinSize", "GroupMaxSize", "GroupDesiredCapacity", "Grou
 metrics_granularity = "1Minute"
 key_name = "gabriel-aws"
 instance_port = 80
-ami = "ami-0c7e0082eed87cb83"
+ami = "ami-07d49002b693a9340"
 instance_type = "t2.micro"
 instance_protocol = "http"
