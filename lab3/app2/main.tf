@@ -15,3 +15,5 @@ module "lb" {
   asg_subnets = data.terraform_remote_state.vpc.outputs.private_subnets
   lb_subnets = data.terraform_remote_state.vpc.outputs.public_subnets
 }
+
+#testando cicd
