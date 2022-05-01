@@ -38,9 +38,9 @@ jobs:
       working-directory: lab3-var-module/app2/
 
     # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      run: terraform fmt -check
-      working-directory: lab3-var-module/app2/
+    #- name: Terraform Format
+     # run: terraform fmt -check
+      #working-directory: lab3-var-module/app2/
 
     - name: Terraform workspace new - LAB
       if: github.ref == 'refs/heads/master'
