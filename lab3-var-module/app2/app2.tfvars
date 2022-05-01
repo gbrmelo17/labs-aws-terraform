@@ -10,3 +10,4 @@ ami = "ami-04b1cc313d8405c9b"
 instance_type = "t2.micro"
 instance_protocol = "http"
 
+
