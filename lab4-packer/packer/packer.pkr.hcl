@@ -7,17 +7,6 @@ packer {
   }
 }
 
-/*variable "aws_access_key" {
-  type = string
-  default = "AKIA6EK34VJLVWZMPK7Q"
-}
-
-variable "aws_secret_key" {
-  type = string
-  default = "Sr5trY82ZgUG59YlQ3bmN3CVKyHOcAXPSBQwdMeM"
-}
-*/
-
 variable "sub_public" {
   type = string
   default = "subnet-034bf96d24b36e74d"
@@ -36,8 +25,7 @@ source "amazon-ebs" "ubuntu" {
   ssh_username = "ec2-user"
   vpc_id = "${var.vpc_id}"
   subnet_id = "${var.sub_public}"
-  //access_key = "${var.aws_access_key}"
-  //secret_key = "${var.aws_secret_key}"
+  
 }
 
 build {
