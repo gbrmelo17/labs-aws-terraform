@@ -1,11 +1,11 @@
-name: 'Terraform'
+name: 'Terraform Destroy'
 
 on:
   push:
     branches:
     - master
     paths:
-    - lab3-var-module/app2/**
+    #- lab3-var-module/app2/**
   pull_request:
 
 permissions:
@@ -38,9 +38,9 @@ jobs:
       working-directory: lab3-var-module/app2/
 
     # Checks that all Terraform configuration files adhere to a canonical format
-    #- name: Terraform Format
-     # run: terraform fmt -check
-      #working-directory: lab3-var-module/app2/
+    # - name: Terraform Format
+    #  run: terraform fmt -check
+    #  working-directory: lab3-var-module/app2/
 
     - name: Terraform workspace new - LAB
       if: github.ref == 'refs/heads/master'
@@ -63,5 +63,5 @@ jobs:
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply - LAB
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      run: terraform apply -var-file=app2.tfvars --auto-approve -input=false
+      run: terraform  -var-file=app2.tfvars --auto-approve -input=false
       working-directory: lab3-var-module/app2/
