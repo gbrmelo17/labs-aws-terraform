@@ -5,6 +5,7 @@ resource "aws_instance" "github_runner" {
   security_groups = [aws_security_group.sg_github_actions.id]
   key_name        = var.key_name
   user_data       = templatefile("user_data.tpl", { hash = var.hash, token = var.token, name_runner = var.name_runner })
+  iam_instance_profile = aws_iam_instance_profile.runner_profile.name
 
   lifecycle {
     create_before_destroy = true
@@ -20,6 +21,62 @@ resource "aws_instance" "github_runner" {
   }
 }
 
+# ASSUME ROLE POLICY - SERVIÇO QUE IRA UTILIZAR A ROLE
+data "aws_iam_policy_document" "runner_iam_assume_policy" {
+  statement {
+
+    actions = [
+      "sts:AssumeRole"
+    ]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+  }
+}
+
+#ROLE
+resource "aws_iam_role" "runner_role" {
+  name               = "runner_role"
+  assume_role_policy = data.aws_iam_policy_document.runner_iam_assume_policy.json
+}
+
+
+#ROLE POLICY - PERMISSÕES DA ROLE
+data "aws_iam_policy_document" "runner_iam_policy" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "*"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+}
+
+#POLICY
+resource "aws_iam_policy" "runner_policy" {
+  name   = "runner_policy"
+  path   = "/"
+  policy = data.aws_iam_policy_document.runner_iam_policy.json
+}
+
+#ATTATCHMENT
+resource "aws_iam_policy_attachment" "runner_attach" {
+  name       = "runner-attachment"
+  roles      = [aws_iam_role.runner_role.name]
+  policy_arn = aws_iam_policy.runner_policy.arn
+}
+
+#PROFILE
+resource "aws_iam_instance_profile" "runner_profile" {
+  name = "runner_profile"
+  role = aws_iam_role.runner_role.name
+}
 
 resource "aws_security_group" "sg_github_actions" {
   name        = format("github-actions-%s", var.environment)
