@@ -1,7 +1,7 @@
-ami_id        = "ami-03ededff12e34e59e"
+ami_id        = "ami-0cff7528ff583bf9a"
 instance_type = "t2.micro"
 key_name      = "gabriel-aws"
-hash          = "2b97bd3f4639a5df6223d7ce728a611a4cbddea9622c1837967c83c86ebb2baa"
-token         = "AWJS6H3X2AZBIXQVMVFUQPDCNYA5Q"
+hash          = 
+token         = 
 environment   = "lab"
 name_runner   = "gabriel-runner"

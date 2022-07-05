@@ -9,16 +9,16 @@ packer {
 
 variable "sub_public" {
   type = string
-  default = "subnet-034bf96d24b36e74d"
+  default = "subnet-0f62cc2e39284dbf7"
 }
 
 variable "vpc_id" {
   type = string
-  default = "vpc-094fc63a883627264"
+  default = "vpc-05f30989a71b82bc9"
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "ami-dns-php"
+  ami_name      = "ami-php-index-loudbalancer"
   instance_type = "t2.micro"
   region        = "us-east-1"
   source_ami    = "ami-0c02fb55956c7d316"
