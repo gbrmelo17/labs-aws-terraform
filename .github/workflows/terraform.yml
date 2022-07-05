@@ -14,7 +14,7 @@ permissions:
 jobs:
   terraform-init:
     name: 'Terraform'
-    runs-on: gabriel-runner
+    runs-on: github_runner-lab
     env: 
       ENVIRONMENT: lab
 
