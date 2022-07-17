@@ -54,7 +54,7 @@ jobs:
       working-directory: lab3-var-module/app2/
 
      # Generates an execution plan for Terraform
-    - # name: Terraform Plan - LAB
+    # - name: Terraform Plan - LAB
       # if: github.ref == 'refs/heads/master'
       # run: terraform plan -var-file=app2.tfvars -input=false
       # working-directory: lab3-var-module/app2/
