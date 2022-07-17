@@ -16,4 +16,4 @@ module "lb" {
   lb_subnets = data.terraform_remote_state.vpc.outputs.public_subnets
 }
 
-#testando cicd destroy
+#testando cicd teste
