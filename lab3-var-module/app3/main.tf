@@ -7,4 +7,4 @@ module "instace" {
   subnet_id = data.terraform_remote_state.vpc.outputs.public_subnets[0]
   
 }
- # teste cicd
+ # teste cicd 
