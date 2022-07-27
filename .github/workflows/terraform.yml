@@ -23,7 +23,7 @@ jobs:
         fetch-depth: 0  
 
   build:
-    name: BUILDAR A IMG E DAR PUSH PARA O DOCKER HUB
+  - name: BUILDAR A IMG E DAR PUSH PARA O DOCKER HUB
     runs-on: gabriel-runner
     needs: [checkout]
     env:
@@ -43,7 +43,7 @@ jobs:
         run: docker push gbrmelo/$APP:${GITHUB_SHA::7}    
 
   terraform-init:
-      name: 'Terraform'
+    - name: 'Terraform'
       runs-on: gabriel-runner
       needs: [build]
       env: 
