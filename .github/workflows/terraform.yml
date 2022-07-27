@@ -42,7 +42,6 @@ jobs:
       - name: PUSH IMAGE
         run: docker push gbrmelo/$APP:${GITHUB_SHA::7}    
 
-jobs:
   terraform-init:
     name: 'Terraform'
     runs-on: gabriel-runner
