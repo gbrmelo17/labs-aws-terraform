@@ -84,9 +84,9 @@ jobs:
 
      # Generates an execution plan for Terraform
     - name: Terraform Plan - LAB
-      if: github.ref == 'refs/heads/master'
-      run: terraform plan -var-file=app2.tfvars -var="img_repo=$APP" -var="img_tag=${GITHUB_SHA::7}" -input=false
-      working-directory: lab3-var-module/app2/
+       if: github.ref == 'refs/heads/master'
+       run: terraform plan -var-file=app2.tfvars -var="img_repo=$APP" -var="img_tag=${GITHUB_SHA::7}" -input=false
+       working-directory: lab3-var-module/app2/
 
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
