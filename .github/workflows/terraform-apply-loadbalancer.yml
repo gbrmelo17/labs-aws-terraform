@@ -12,11 +12,44 @@ permissions:
   contents: read
 
 jobs:
+  checkout:
+    name: checkout
+    runs-on: gabriel-runner
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  
+
+  build:
+    name: BUILDAR A IMG E DAR PUSH PARA O DOCKER HUB
+    runs-on: gabriel-runner
+    needs: [checkout]
+    env:
+      APP: img-php
+
+      steps:
+      - name: LOGIN NO DOCKER HUB 
+        user: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: BUILD IMAGE
+        run: docker build -t gbrmelo/$APP:${GITHUB_SHA::7} .
+
+      - name: PUSH IMAGE
+        run: docker push gbrmelo/$APP:${GITHUB_SHA::7}    
+
+jobs:
   terraform-init:
     name: 'Terraform'
     runs-on: gabriel-runner
+    needs: [build]
     env: 
       ENVIRONMENT: lab
+      APP: img-php
 
     steps:
     - uses: actions/setup-node@v2
@@ -54,14 +87,14 @@ jobs:
       working-directory: lab3-var-module/app2/
 
      # Generates an execution plan for Terraform
-    # - name: Terraform Plan - LAB
-      # if: github.ref == 'refs/heads/master'
-      # run: terraform plan -var-file=app2.tfvars -input=false
-      # working-directory: lab3-var-module/app2/
+     - name: Terraform Plan - LAB
+       if: github.ref == 'refs/heads/master'
+       run: terraform plan -var-file=app2.tfvars -var-"img_repo=$APP" -var="img_tag=${GITHUB_SHA::7}" -input=false
+       working-directory: lab3-var-module/app2/
 
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Destroy - LAB
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-      run: terraform  destroy -var-file=app2.tfvars --auto-approve -input=false
+      run: erraform apply -var-file=app2.tfvars -var-"img_repo=$APP" -var="img_tag=${GITHUB_SHA::7}" --auto-approve -input=false
       working-directory: lab3-var-module/app2/
