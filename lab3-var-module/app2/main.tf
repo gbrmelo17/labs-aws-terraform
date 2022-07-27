@@ -18,5 +18,5 @@ module "lb" {
   img_tag = var.img_tag
 }
 
-#testando cicd teste 1s
+#testando cicd teste 1
 
