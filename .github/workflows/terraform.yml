@@ -37,10 +37,10 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
     - name: BUILD IMAGE
-      run: docker build -t gbrmelo/$APP:${GITHUB::7}
+      run: docker build -t gbrmelo/$APP:${GITHUB::7} .
 
     - name: PUSH IMAGE
-      run: docker push -t gbrmelo/$APP:${GITHUB_SHA:77} .              
+      run: docker push  gbrmelo/$APP:${GITHUB_SHA:77}              
 
   terraform-init:
     name: 'Terraform'
