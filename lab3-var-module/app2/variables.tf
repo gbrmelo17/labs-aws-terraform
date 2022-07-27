@@ -41,3 +41,11 @@ variable "instance_type" {
 variable "key_name" {
   type = string
 }
+
+variable "img_repo" {
+  type = string
+}
+
+variable "img_tag" {
+  type = string
+}

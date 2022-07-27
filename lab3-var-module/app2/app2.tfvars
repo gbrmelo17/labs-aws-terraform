@@ -6,7 +6,7 @@ enabled_metrics = ["GroupMinSize", "GroupMaxSize", "GroupDesiredCapacity", "Grou
 metrics_granularity = "1Minute"
 key_name = "gabriel-ec2"
 instance_port = 80
-ami = "ami-0b4851d217c36f03a"
+ami = "ami-07244d6217ebe7127"
 instance_type = "t2.micro"
 instance_protocol = "http"
 

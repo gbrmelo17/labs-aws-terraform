@@ -8,34 +8,34 @@ packer {
 }
 
 variable "sub_public" {
-  type = string
-  default = "subnet-0f62cc2e39284dbf7"
+  type    = string
+  default = "subnet-035914b8bebaf8202"
 }
 
 variable "vpc_id" {
-  type = string
-  default = "vpc-05f30989a71b82bc9"
+  type    = string
+  default = "vpc-08df2ceaf571c0827"
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "ami-php-index-loudbalancer"
+  ami_name      = "ami-docker"
   instance_type = "t2.micro"
   region        = "us-east-1"
-  source_ami    = "ami-0c02fb55956c7d316"
-  ssh_username = "ec2-user"
-  vpc_id = "${var.vpc_id}"
-  subnet_id = "${var.sub_public}"
-  
+  source_ami    = "ami-0cff7528ff583bf9a"
+  ssh_username  = "ec2-user"
+  vpc_id        = "${var.vpc_id}"
+  subnet_id     = "${var.sub_public}"
+
 }
 
 build {
-  name    = "learn-packer"
+  name = "learn-packer"
   sources = [
     "source.amazon-ebs.ubuntu"
   ]
 
   provisioner "file" {
-    source = "../packer"
+    source      = "../packer"
     destination = "/tmp/"
   }
 

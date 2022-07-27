@@ -53,3 +53,11 @@ variable "key_name" {
 variable "vpc_id" {
   type = string
 }
+
+variable "img_repo" {
+  type = string
+}
+
+variable "img_tag" {
+  type = string
+}

@@ -14,6 +14,8 @@ module "lb" {
   vpc_id = data.terraform_remote_state.vpc.outputs.vpc
   asg_subnets = data.terraform_remote_state.vpc.outputs.private_subnets
   lb_subnets = data.terraform_remote_state.vpc.outputs.public_subnets
+  img_repo = var.img_repo
+  img_tag = var.img_tag
 }
 
-#testando cicd teste
+#testando cicd teste 

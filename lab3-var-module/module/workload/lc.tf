@@ -5,6 +5,8 @@ resource "aws_launch_configuration" "lc" {
   key_name = var.key_name
   security_groups = [aws_security_group.lc_sg.id]
 
+  user_data = base64encode(templatefile("${path.module}/user_data.tpl",{ img_repo = var.img_repo, img_tag = var.img_tag}))
+
   lifecycle {
     create_before_destroy = true
   }
