@@ -123,6 +123,6 @@ resource "aws_security_group_rule" "allow_22" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = ["191.47.232.118/32"]
+  cidr_blocks       = ["191.47.235.79/32"]
   security_group_id = aws_security_group.sg_github_actions.id
 }
