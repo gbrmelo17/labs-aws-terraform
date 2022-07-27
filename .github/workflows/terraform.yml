@@ -66,8 +66,8 @@ jobs:
       run: terraform init
       working-directory: lab3-var-module/app2/
 
-     Checks that all Terraform configuration files adhere to a canonical format
-     - name: Terraform Format
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
       run: terraform fmt -check
       working-directory: lab3-var-module/app2/
 
