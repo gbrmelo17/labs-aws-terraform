@@ -13,4 +13,5 @@ yum update -y
 yum install docker -y
 systemctl enable docker.service
 systemctl enable containerd.service
+sudo service docker start
 sudo chmod 666 /var/run/docker.sock
