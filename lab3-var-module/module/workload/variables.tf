@@ -60,4 +60,4 @@ variable "img_repo" {
 
 variable "img_tag" {
   type = string
-}
+} 

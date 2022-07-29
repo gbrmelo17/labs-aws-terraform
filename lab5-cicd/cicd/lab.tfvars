@@ -1,4 +1,4 @@
-ami_id        = "ami-0cff7528ff583bf9a"
+ami_id        = "ami-07244d6217ebe7127"
 instance_type = "t2.micro"
 key_name      = "gabriel-ec2"
 hash          = ""
