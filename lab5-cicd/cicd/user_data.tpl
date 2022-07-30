@@ -8,5 +8,5 @@ tar xzf ./actions-runner-linux-x64-2.294.0.tar.gz
 chown -R ec2-user .
 sudo -u ec2-user -- ./config.sh --url https://github.com/gbrmelo17/labs-aws-terraform --token ${token} --name ${name_runner} --work _work --runnergroup Default --labels ${name_runner} --unattended --runasservice
 sudo -u ec2-user -- ./run.sh
-sudo service docker start
 sudo chmod 666 /var/run/docker.sock
+sudo systemctl start docker
