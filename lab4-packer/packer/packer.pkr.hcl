@@ -9,16 +9,16 @@ packer {
 
 variable "sub_public" {
   type    = string
-  default = "subnet-035914b8bebaf8202"
+  default = "subnet-02410c25cb83f0606"
 }
 
 variable "vpc_id" {
   type    = string
-  default = "vpc-08df2ceaf571c0827"
+  default = "vpc-0e0163b4779465e53"
 }
 
 source "amazon-ebs" "ubuntu" {
-  ami_name      = "ami-docker"
+  ami_name      = "ami-docker2"
   instance_type = "t2.micro"
   region        = "us-east-1"
   source_ami    = "ami-0cff7528ff583bf9a"
