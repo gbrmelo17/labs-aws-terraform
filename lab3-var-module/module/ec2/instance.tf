@@ -4,7 +4,7 @@ resource "aws_instance" "ec2teste" {
   key_name = var.key_name
   subnet_id = var.subnet_id
   security_groups = [aws_security_group.allow-protocol.id]
-  //user_data = file("data.sh")
+ 
 
   tags = {
     Name = "ec2 teste"
