@@ -3,7 +3,7 @@
     "name": "ecs-container-teste",
    "image": "971392199255.dkr.ecr.us-east-1.amazonaws.com/testecluster:latest",
     "cpu": 128,
-    "memory": 512,
+    "memory": 256,
     "links": [],
     "portMappings": [
         { 

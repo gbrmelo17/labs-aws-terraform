@@ -1,18 +1,3 @@
-#CRIAÇÃO DO REPOSITORIO ECR DAS IMGS
-resource "aws_ecr_repository" "teste-nginx" {
-  name = "teste-nginx"
-  image_tag_mutability = "MUTABLE"
-
-  image_scanning_configuration {
-    scan_on_push = true
-  }
-}
-
-output "repo_url" {
-  value = "${aws_ecr_repository.teste-nginx.repository_url}"
-
-}
-
 #CRIAÇÃO DA ROLE DE EC2 PARA UTILIZAR OS CONTAINERS
 resource "aws_iam_role" "ecs-instance-role" {
   name = "ecs-instance-role"
@@ -82,10 +67,20 @@ resource "aws_ecs_cluster" "cluster-teste" {
   name = "ecs-cluster-teste"
 }
 
+data "aws_ami" "ecs_ami" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values =  ["amzn2-ami-ecs-hvm-2.0.*-x86_64-ebs"] 
+  }
+}
+
 #ECS AGENT
 resource "aws_instance" "ecs-agent" {
-  ami             = "ami-041c01326b5e1f2f7"
-  instance_type   = "t2.micro"
+  ami             = data.aws_ami.ecs_ami.id
+  instance_type   = "t3.medium"
   subnet_id       = data.terraform_remote_state.vpc.outputs.public_subnets[0]
   security_groups = [aws_security_group.ecs-sg.id]
   key_name        = "gabriel-ec2"
@@ -103,6 +98,9 @@ resource "aws_instance" "ecs-agent" {
 
 data "template_file" "user_data" {
   template = "${file("${path.module}/user_data.tpl")}"
+  vars = {
+    ecs_cluster = "ecs-cluster-teste"
+  }
 }
 
 resource "aws_security_group" "ecs-sg" {
@@ -129,9 +127,9 @@ resource "aws_security_group" "ecs-sg" {
 resource "aws_ecs_task_definition" "task_definition" {
   container_definitions = "${data.template_file.task_definition_json.rendered}"
   family = "ecs-task-definition"
-  network_mode = "awsvpc"
-  memory = "2048"
-  cpu = "1024"
+  network_mode = "bridge"
+  memory = "512"
+  cpu = "256"
   requires_compatibilities = ["EC2"]
 }
 
@@ -146,8 +144,8 @@ resource "aws_ecs_service" "service" {
   name = "cluster-teste"
   task_definition = aws_ecs_task_definition.task_definition.id
 
-  network_configuration {
-    security_groups = [aws_security_group.ecs-sg.id]
-    subnets = [data.terraform_remote_state.vpc.outputs.public_subnets[0]]
-  }
+ //network_configuration {
+   // security_groups = [aws_security_group.ecs-sg.id]
+    //subnets = [data.terraform_remote_state.vpc.outputs.public_subnets[0]]
+  //}
 }
