@@ -39,28 +39,15 @@ variable "key_name" {
   type = string
 }
 
-variable "network_mode" {
+variable "asg_subnets" {
+  type = list(any)
+}
+
+variable "lb_subnets" {
+  type = list(any)
+}
+
+variable "vpc_id" {
   type = string
 }
-
-variable "memory" {
-  type = string
-}
-
-variable "cpu" {
-  type = string
-}
-
-variable "requires_compatibilities" {
-  type = string
-}
-
-variable "desired_count" {
-  type = number
-}
-
-variable "launch_type" {
-  type = string
-}
-
 
